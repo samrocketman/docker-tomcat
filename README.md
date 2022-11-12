@@ -31,6 +31,20 @@ provided.
 All logs push to stdout.  Access logs are prefixed with `ACCESS:` followed by
 the standard tomcat logging format.
 
+# Filesystem layout
+
+A filesystem layout has been generated highlighting the parts for tomcat
+excluding Java.
+
+See [filesystem-layout.txt](filesystem-layout.txt)
+
+```bash
+docker run -itu root tomcat /bin/sh -c \
+  'apk add tree &> /dev/null; tree /tmp /webapps /opt/tomcat /tomcat' \
+  > filesystem-layout.txt
+```
+
+
 # WebApp example
 
 You can try this out with Jenkins.  At the root of this repository download

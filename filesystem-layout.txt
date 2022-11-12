@@ -1,0 +1,86 @@
+/tmp
+/webapps
+/opt/tomcat
+├── LICENSE
+├── NOTICE
+├── RELEASE-NOTES
+├── bin
+│   ├── bootstrap.jar
+│   ├── catalina-tasks.xml
+│   ├── catalina.bat
+│   ├── catalina.sh
+│   ├── ciphers.bat
+│   ├── ciphers.sh
+│   ├── commons-daemon-native.tar.gz
+│   ├── commons-daemon.jar
+│   ├── configtest.bat
+│   ├── configtest.sh
+│   ├── daemon.sh
+│   ├── digest.bat
+│   ├── digest.sh
+│   ├── makebase.bat
+│   ├── makebase.sh
+│   ├── setclasspath.bat
+│   ├── setclasspath.sh
+│   ├── shutdown.bat
+│   ├── shutdown.sh
+│   ├── startup.bat
+│   ├── startup.sh
+│   ├── tomcat-juli.jar
+│   ├── tomcat-native.tar.gz
+│   ├── tool-wrapper.bat
+│   ├── tool-wrapper.sh
+│   ├── version.bat
+│   └── version.sh
+└── lib
+    ├── annotations-api.jar
+    ├── catalina-ant.jar
+    ├── catalina-ha.jar
+    ├── catalina-ssi.jar
+    ├── catalina-storeconfig.jar
+    ├── catalina-tribes.jar
+    ├── catalina.jar
+    ├── ecj-4.20.jar
+    ├── el-api.jar
+    ├── jasper-el.jar
+    ├── jasper.jar
+    ├── jaspic-api.jar
+    ├── jsp-api.jar
+    ├── servlet-api.jar
+    ├── tomcat-api.jar
+    ├── tomcat-coyote.jar
+    ├── tomcat-dbcp.jar
+    ├── tomcat-i18n-cs.jar
+    ├── tomcat-i18n-de.jar
+    ├── tomcat-i18n-es.jar
+    ├── tomcat-i18n-fr.jar
+    ├── tomcat-i18n-ja.jar
+    ├── tomcat-i18n-ko.jar
+    ├── tomcat-i18n-pt-BR.jar
+    ├── tomcat-i18n-ru.jar
+    ├── tomcat-i18n-zh-CN.jar
+    ├── tomcat-jdbc.jar
+    ├── tomcat-jni.jar
+    ├── tomcat-util-scan.jar
+    ├── tomcat-util.jar
+    ├── tomcat-websocket.jar
+    └── websocket-api.jar
+/tomcat
+├── bin
+│   ├── setenv.sh
+│   └── tomcat-juli.jar
+├── conf
+│   ├── catalina.policy
+│   ├── catalina.properties
+│   ├── logging.properties
+│   ├── server.xml
+│   └── web.xml
+├── lib
+│   └── org
+│       └── apache
+│           └── catalina
+│               └── util
+│                   └── ServerInfo.properties
+└── work
+
+8 directories, 8 files
