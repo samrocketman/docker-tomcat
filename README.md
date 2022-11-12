@@ -3,12 +3,14 @@
 Minimal tomcat container based on alpine meant for production use.  TLS is
 assumed to be provided externally by a load balancer.
 
-Best practices
+# Best practices
 
 - Tomcat 9 running on openjdk11
   - Configuration split between `CATALINA_HOME` and `CATALINA_BASE`.
+  - Final image size is 292MB.
+  - Compatible with both AMD64 and ARM (due to Java on Alpine)
 - Docker practices
-  - Minimal alpine image with openjdk11.
+  - Minimal alpine image.
   - PID 1 init program to handle process signals and child processes.
   - Application starts as a normal system user instead of `root`.
   - Web server starts in foreground.
