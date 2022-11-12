@@ -19,12 +19,22 @@ assumed to be provided externally by a load balancer.
 - Security hardened
   - CIS Apache Tomcat 9 Benchmark; v1.1.0 - 12-18-2020
 
-# Dockerfiles
+# Tomcat base image
 
 The tomcat base image can be viewed in [`Dockerfile`](Dockerfile).
 
+    docker build -t tomcat .
+
+# Application deployment
+
 An example [application Dockerfile](Dockerfile.multistage) has also been
 provided.
+
+Due to hardening `unpackWARs` and `autoDeploy` are both disabled.  You must
+extract your war files as part of Docker image building.
+
+> Note: The application Dockerfile uses `java xf *.war` to extract an
+> application into `/webapps/ROOT`.
 
 # Logging
 
@@ -43,7 +53,6 @@ docker run -itu root tomcat /bin/sh -c \
   'apk add tree &> /dev/null; tree /tmp /webapps /opt/tomcat /tomcat' \
   > filesystem-layout.txt
 ```
-
 
 # WebApp example
 
