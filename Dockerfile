@@ -47,4 +47,4 @@ ENV PATH="${JAVA_HOME}"/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/s
 ENV CATALINA_BASE=/tomcat CATALINA_HOME=/opt/tomcat
 ENV JAVA_OPTS=-Djava.awt.headless=true
 EXPOSE 8080
-CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+CMD ["/opt/tomcat/bin/catalina.sh", "run", "-security"]

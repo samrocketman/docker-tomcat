@@ -36,6 +36,16 @@ extract your war files as part of Docker image building.
 > Note: The application Dockerfile uses `java xf *.war` to extract an
 > application into `/webapps/ROOT`.
 
+It is recommended to keep tomcat security hardening in place and add your own
+[`catalina.policy`](tomcat-base/conf/catalina.policy) (see [Tomcat
+docs][tomcat-security]).  However, if you want to disable sandboxing entirely
+you can add the following line to the end of your [application
+Dockerfile](Dockerfile.multistage) removing `-security` option.
+
+```dockerfile
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+```
+
 # Logging
 
 All logs push to stdout.  Access logs are prefixed with `ACCESS:` followed by
@@ -77,3 +87,5 @@ docker run -v "${JENKINS_HOME}:/jenkins \
 
 Visit http://localhost:8080/ to see your example app running.  Use `CTRL+C` to
 exit.
+
+[tomcat-security]: https://tomcat.apache.org/tomcat-9.0-doc/security-manager-howto.html
