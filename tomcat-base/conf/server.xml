@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Server port="8005" shutdown="SHUTDOWN">
+<Server port="-1" shutdown="SHUTDOWN">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
-  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="off" />
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
-  <Service name="MyApp">
-    <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
-        maxThreads="150" minSpareThreads="4"/>
+  <Service name="WebApp">
+    <Executor name="tomcatThreadPool" namePrefix="catalina-exec-" maxThreads="150" minSpareThreads="4"/>
     <Connector port="8080" protocol="HTTP/1.1"
                executor="tomcatThreadPool"
                connectionTimeout="20000"
-               server="Tomcat"
+               server=""
                xpoweredBy="false"
                redirectPort="8443" />
-    <Engine name="MyApp" defaultHost="statichost">
+    <Engine name="WebApp" defaultHost="statichost">
       <Host name="statichost"  appBase="/webapps" unpackWARs="false" autoDeploy="false">
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="/dev"
                prefix="stdout" suffix=""
