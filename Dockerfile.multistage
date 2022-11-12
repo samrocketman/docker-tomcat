@@ -1,0 +1,12 @@
+FROM tomcat
+WORKDIR /webapps
+ADD SampleWebApp.war /
+RUN set -ex; \
+mkdir ROOT; \
+cd ROOT; \
+jar xf /SampleWebApp.war
+
+FROM tomcat
+RUN set -ex; \
+mkdir -p /tomcat/webapps/ROOT
+COPY --from=0 /webapps/ROOT /tomcat/webapps/ROOT

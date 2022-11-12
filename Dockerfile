@@ -5,13 +5,7 @@ apk add --no-cache openjdk11-jdk dumb-init; \
 adduser -u 100 -G nogroup -h /home/tomcat -S tomcat; \
 mkdir /tomcat; \
 cd /tomcat; \
-mkdir -p bin conf lib temp webapps; \
-cd lib; \
-# harden tomcat server info properties
-mkdir -p org/apache/catalina/util; \
-echo -e 'server.info=Tomcat\nserver.number=\nserver.built=' > org/apache/catalina/util/ServerInfo.properties; \
-jar cf catalina.jar org/apache/catalina/util/ServerInfo.properties; \
-rm -r org
+mkdir -p bin conf
 
 # Install tomcat 10
 # https://tomcat.apache.org/download-10.cgi
@@ -24,15 +18,29 @@ echo "$hash  apache-tomcat-$version.tar.gz" | sha512sum -c -;\
 tar -xzf apache-tomcat-"$version".tar.gz; \
 rm apache-tomcat-"$version".tar.gz; \
 ln -s apache-tomcat-"$version" tomcat; \
+rm -r tomcat/webapps; \
 chown -R tomcat: apache-tomcat-"$version"
 
-# set up catalina base
-ADD tomcat-base /tomcat/
+# harden tomcat server info properties
+#RUN set -ex; \
+#cp /opt/tomcat/conf/web.xml /opt/tomcat/conf/catalina.* /tomcat/conf/; \
+#cd /opt/tomcat/lib; \
+#mkdir -p org/apache/catalina/util; \
+#echo -e 'server.info=Tomcat\nserver.number=\nserver.built=' > org/apache/catalina/util/ServerInfo.properties; \
+#jar uf catalina.jar org/apache/catalina/util/ServerInfo.properties; \
+#rm -r org
+
+# set up catalina base based on RUNNING.txt
+#ADD tomcat-base /tomcat/
 RUN set -ex; \
-mkdir /webapp; \
-chown -R tomcat: /tomcat /webapp
+cp /opt/tomcat/bin/tomcat-juli.jar /tomcat/bin/; \
+mkdir /webapps /tomcat/work /tomcat/temp; \
+cp -r /opt/tomcat/conf /tomcat/; \
+ln -s /opt/tomcat/lib /tomcat/; \
+chown -R tomcat: /tomcat /webapps
 
 USER tomcat
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 ENV CATALINA_BASE=/tomcat CATALINA_HOME=/opt/tomcat
+EXPOSE 8080
 CMD ["/opt/apache-tomcat-10.1.1/bin/catalina.sh", "run"]
