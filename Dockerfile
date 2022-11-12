@@ -9,6 +9,9 @@ mkdir -p bin conf
 
 # Install tomcat 9
 # https://tomcat.apache.org/download-90.cgi
+# - Copy minimally necessary config to catalina base
+# - Harden tomcat
+# - Slim down tomcat
 RUN set -ex; \
 cd /opt; \
 tomcat_major=9; \
@@ -19,21 +22,23 @@ echo "$hash  apache-tomcat-$version.tar.gz" | sha512sum -c -;\
 tar -xzf apache-tomcat-"$version".tar.gz; \
 rm apache-tomcat-"$version".tar.gz; \
 ln -s apache-tomcat-"$version" tomcat; \
-rm -r tomcat/webapps; \
+mkdir -p /tomcat/conf; \
+cp /opt/tomcat/conf/web.xml /opt/tomcat/conf/catalina.* /tomcat/conf/; \
+mkdir -p /tomcat/lib/org/apache/catalina/util; \
+echo -e 'server.info=\nserver.number=\nserver.built=' > /tomcat/lib/org/apache/catalina/util/ServerInfo.properties; \
+cd tomcat; \
+rm -r webapps logs work temp conf *.txt *.md; \
 chmod 750 apache-tomcat-"$version"; \
 chown -R tomcat: apache-tomcat-"$version"
 
 # harden tomcat server info properties so that it returns nothing
 RUN set -ex; \
-cp /opt/tomcat/conf/web.xml /opt/tomcat/conf/catalina.* /tomcat/conf/; \
-mkdir -p /tomcat/lib/org/apache/catalina/util; \
-echo -e 'server.info=\nserver.number=\nserver.built=' > /tomcat/lib/org/apache/catalina/util/ServerInfo.properties
 
 # set up catalina base based on RUNNING.txt
 ADD tomcat-base /tomcat/
 RUN set -ex; \
 cp /opt/tomcat/bin/tomcat-juli.jar /tomcat/bin/; \
-mkdir /webapps /tomcat/work /tomcat/temp; \
+mkdir /webapps /tomcat/work; \
 chmod 750 /tomcat /webapps; \
 chown -R tomcat: /tomcat /webapps
 
