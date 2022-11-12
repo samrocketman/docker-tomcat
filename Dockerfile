@@ -28,11 +28,9 @@ mkdir -p /tomcat/lib/org/apache/catalina/util; \
 echo -e 'server.info=\nserver.number=\nserver.built=' > /tomcat/lib/org/apache/catalina/util/ServerInfo.properties; \
 cd tomcat; \
 rm -r webapps logs work temp conf *.txt *.md; \
+cd ..; \
 chmod 750 apache-tomcat-"$version"; \
 chown -R tomcat: apache-tomcat-"$version"
-
-# harden tomcat server info properties so that it returns nothing
-RUN set -ex; \
 
 # set up catalina base based on RUNNING.txt
 ADD tomcat-base /tomcat/
