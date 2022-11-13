@@ -2,8 +2,7 @@ FROM tomcat
 WORKDIR /webapps
 ADD *.war ./
 RUN set -ex; \
-mkdir ROOT; \
-cd ROOT; \
+cd /webapps/ROOT; \
 jar xf ../*.war
 
 FROM tomcat

@@ -44,7 +44,7 @@ ADD tomcat-base /tomcat/
 RUN set -ex; \
 cd /tomcat; \
 cp /opt/tomcat/bin/tomcat-juli.jar /tomcat/bin/; \
-mkdir /data /webapps work temp; \
+mkdir -p /data /webapps/ROOT work temp; \
 chmod 700 /data /tomcat /webapps /data; \
 chown -R tomcat: /data /tomcat /webapps
 
