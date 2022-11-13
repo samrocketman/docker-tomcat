@@ -1,7 +1,14 @@
 FROM alpine
+ARG java=jre tls=false extras=false all=false
 
 RUN set -ex; \
-apk add --no-cache java-cacerts ca-certificates ttf-dejavu fontconfig openjdk11-jdk dumb-init; \
+if ! [ "${java}" = jdk -o "${java}" = jre ]; then \
+  echo 'ERROR: docker-build arg java must be jre or jdk.' >&2; \
+  exit 1; \
+fi; \
+apk add --no-cache openjdk11-"${java}" dumb-init; \
+[ "${tls}" = false -a "${all}" = false ] || apk add --no-cache java-cacerts ca-certificates; \
+[ "${extras}" = false -a "${all}" = false ] || apk add --no-cache ttf-dejavu fontconfig; \
 adduser -u 100 -G nogroup -h /home/tomcat -S tomcat; \
 mkdir /tomcat; \
 cd /tomcat; \
@@ -29,16 +36,17 @@ echo -e 'server.info=\nserver.number=\nserver.built=' > /tomcat/lib/org/apache/c
 cd tomcat; \
 rm -r webapps logs work temp conf *.txt *.md; \
 cd ..; \
-chmod 750 apache-tomcat-"$version"; \
+chmod 700 apache-tomcat-"$version"; \
 chown -R tomcat: apache-tomcat-"$version"
 
 # set up catalina base based on RUNNING.txt
 ADD tomcat-base /tomcat/
 RUN set -ex; \
+cd /tomcat; \
 cp /opt/tomcat/bin/tomcat-juli.jar /tomcat/bin/; \
-mkdir /webapps /tomcat/work; \
-chmod 750 /tomcat /webapps; \
-chown -R tomcat: /tomcat /webapps
+mkdir /data /webapps work temp; \
+chmod 700 /data /tomcat /webapps /data; \
+chown -R tomcat: /data /tomcat /webapps
 
 USER tomcat
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
