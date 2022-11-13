@@ -18,6 +18,14 @@
         redirectPort="8443" />
 
     <Engine name="WebApp" defaultHost="statichost">
+      <Realm className="org.apache.catalina.realm.LockOutRealm"
+          failureCount="3"
+          lockOutTime="600"
+          cacheSize="1000"
+          cacheRemovalWarningTime="3600">
+        <Realm className="org.apache.catalina.realm.DataSourceRealm"
+            localDataSource="true" />
+      </Realm>
       <Host name="statichost"  appBase="/webapps" unpackWARs="false" autoDeploy="false">
         <Valve
             className="org.apache.catalina.valves.AccessLogValve"
