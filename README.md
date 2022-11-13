@@ -39,8 +39,22 @@ The tomcat base image can be viewed in [`Dockerfile`](Dockerfile).
 
 # Application deployment
 
-Your application should be extracted to `/webapps/ROOT`.  Any other location my
-require changing the security manager policy.
+* `/webapps/ROOT` - Extract your application WAR here.
+* `/data` - If your app requires persistent data then `/data` is the location
+  assumed.
+
+Security policy grants your app unconstrained access to the following locations.
+
+```
+/data
+/dev/shm
+/home/tomcat
+/tmp
+/var/tmp
+/webapps/ROOT
+```
+
+Other locations will require a policy update.
 
 ### Example Application Dockerfile
 
@@ -111,13 +125,13 @@ Build all prerequisite docker images.
 
     docker build --build-arg java=jdk --build-arg all=true -t tomcat .
     docker build -t sample -f Dockerfile.multistage .
-    mkdir ../jenkins_home
 
 Run Jenkins webapp in hardened tomcat container.
 
 ```bash
+mkdir ../jenkins_home
 JENKINS_HOME="$(cd ../jenkins_home; pwd)"
-docker run -v "${JENKINS_HOME}:/jenkins \
+docker run -v "${JENKINS_HOME}:/data \
   -e JENKINS_HOME=/jenkins --rm -p 8080:8080 sample
 ```
 
