@@ -7,18 +7,25 @@
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
   <Service name="WebApp">
     <Executor name="tomcatThreadPool" namePrefix="catalina-exec-" maxThreads="150" minSpareThreads="4"/>
-    <Connector port="8080" protocol="HTTP/1.1"
-               executor="tomcatThreadPool"
-               connectionTimeout="20000"
-               server=""
-               xpoweredBy="false"
-               redirectPort="8443" />
+    <Connector
+        protocol="HTTP/1.1"
+        port="8080"
+        executor="tomcatThreadPool"
+        connectionTimeout="20000"
+        server=""
+        xpoweredBy="false"
+        allowTrace="false"
+        redirectPort="8443" />
+
     <Engine name="WebApp" defaultHost="statichost">
       <Host name="statichost"  appBase="/webapps" unpackWARs="false" autoDeploy="false">
-        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="/dev"
-               prefix="stdout" suffix=""
-               rotatable="false"
-               pattern="ACCESS: %h %l %u %t &quot;%r&quot; %s %b" />
+        <Valve
+            className="org.apache.catalina.valves.AccessLogValve"
+            directory="/dev"
+            prefix="stdout"
+            suffix=""
+            rotatable="false"
+            pattern="ACCESS: %h %l %u %t &quot;%r&quot; %s %b" />
       </Host>
     </Engine>
   </Service>

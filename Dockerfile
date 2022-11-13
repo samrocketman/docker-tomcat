@@ -31,7 +31,6 @@ tar -xzf apache-tomcat-"$tomcat_version".tar.gz; \
 rm apache-tomcat-"$tomcat_version".tar.gz; \
 ln -s apache-tomcat-"$tomcat_version" tomcat; \
 mkdir -p /tomcat/conf; \
-cp /opt/tomcat/conf/web.xml /opt/tomcat/conf/catalina.* /tomcat/conf/; \
 mkdir -p /tomcat/lib/org/apache/catalina/util; \
 echo -e 'server.info=\nserver.number=\nserver.built=' > /tomcat/lib/org/apache/catalina/util/ServerInfo.properties; \
 cd tomcat; \
