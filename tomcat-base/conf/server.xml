@@ -11,7 +11,7 @@
         protocol="HTTP/1.1"
         port="8080"
         executor="tomcatThreadPool"
-        connectionTimeout="20000"
+        connectionTimeout="60000"
         server=""
         xpoweredBy="false"
         allowTrace="false"
@@ -29,7 +29,12 @@
         <Realm className="org.apache.catalina.realm.DataSourceRealm"
             localDataSource="true" />
       </Realm>
-      <Host name="statichost"  appBase="/webapps" unpackWARs="false" autoDeploy="false">
+      <Host name="statichost"
+          appBase="/webapps"
+          autoDeploy="false"
+          deployOnStartup="false"
+          unpackWARs="false">
+        <Context path="" docBase="ROOT"></Context>
         <Valve
             className="org.apache.catalina.valves.AccessLogValve"
             directory="/dev"

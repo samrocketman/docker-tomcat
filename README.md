@@ -32,13 +32,17 @@ assumed to be provided externally by a load balancer.
   - CIS Apache Tomcat 9 Benchmark; v1.1.0 - 12-18-2020
   - Default tomcat apps removed.
   - Tomcat security manager enabled with a sane initial security policy.
+  - Access restricted to tomcat user for configuration files
   - `unpackWARs` and `autoDeploy` is disabled.
-  - `chmod 700 /tomcat /opt/tomcat /data /home/tomcat`
   - Printing stack traces on error is disabled.
   - TRACE HTTP method disabled.
   - LockOutRealm is configured.
   - Shutdown port is disabled.
   - Shutdown command is randomized on boot.
+  - Connector security configured for HTTP
+  - Autodeployment on startup is disabled and `/webapps/ROOT` is defined for
+    manual deployment context in `server.xml`.
+  - Connection timeout set to 60 seconds.
 
 
 # Tomcat base image
