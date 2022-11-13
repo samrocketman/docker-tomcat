@@ -1,4 +1,8 @@
 FROM tomcat
+USER root
+RUN set -ex; \
+if ! type -f jar; then apk add --no-cache openjdk11-jdk; fi
+USER tomcat
 WORKDIR /webapps
 ADD *.war ./
 RUN set -ex; \
