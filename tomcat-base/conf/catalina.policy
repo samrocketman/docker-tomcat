@@ -3,88 +3,43 @@
 
 // These permissions apply to javac
 grant codeBase "file:${java.home}/lib/-" {
-        permission java.security.AllPermission;
+    permission java.security.AllPermission;
 };
 
 // These permissions apply to all shared system extensions
 grant codeBase "file:${java.home}/jre/lib/ext/-" {
-        permission java.security.AllPermission;
+    permission java.security.AllPermission;
 };
 
 // These permissions apply to javac when ${java.home} points at $JAVA_HOME/jre
 grant codeBase "file:${java.home}/../lib/-" {
-        permission java.security.AllPermission;
+    permission java.security.AllPermission;
 };
 
 // These permissions apply to all shared system extensions when
 // ${java.home} points at $JAVA_HOME/jre
 grant codeBase "file:${java.home}/lib/ext/-" {
-        permission java.security.AllPermission;
+    permission java.security.AllPermission;
 };
 
 grant codeBase "file:${catalina.home}/bin/commons-daemon.jar" {
-        permission java.security.AllPermission;
+    permission java.security.AllPermission;
 };
 
-// UPDATED: changed catalina.home to catalina.base
-grant codeBase "file:${catalina.base}/bin/tomcat-juli.jar" {
-        permission java.io.FilePermission
-         "${java.home}${file.separator}lib${file.separator}logging.properties", "read";
-
-        permission java.io.FilePermission
-         "${catalina.base}${file.separator}conf${file.separator}logging.properties", "read";
-        permission java.io.FilePermission
-         "${catalina.base}${file.separator}logs", "read, write";
-        permission java.io.FilePermission
-         "${catalina.base}${file.separator}logs${file.separator}*", "read, write, delete";
-
-        permission java.lang.RuntimePermission "shutdownHooks";
-        permission java.lang.RuntimePermission "getClassLoader";
-        permission java.lang.RuntimePermission "setContextClassLoader";
-
-        permission java.lang.management.ManagementPermission "monitor";
-
-        permission java.util.logging.LoggingPermission "control";
-
-        permission java.util.PropertyPermission "java.util.logging.config.class", "read";
-        permission java.util.PropertyPermission "java.util.logging.config.file", "read";
-        permission java.util.PropertyPermission "org.apache.juli.AsyncMaxRecordCount", "read";
-        permission java.util.PropertyPermission "org.apache.juli.AsyncOverflowDropType", "read";
-        permission java.util.PropertyPermission "org.apache.juli.ClassLoaderLogManager.debug", "read";
-        permission java.util.PropertyPermission "catalina.base", "read";
-};
 
 grant codeBase "file:${catalina.home}/bin/bootstrap.jar" {
-        permission java.security.AllPermission;
+    permission java.security.AllPermission;
 };
 
 grant codeBase "file:${catalina.home}/lib/-" {
-        permission java.security.AllPermission;
+    permission java.security.AllPermission;
 };
 
-
-// ADDED: catalina.base lib directory
-grant codeBase "file:${catalina.base}/lib/-" {
-  permission java.security.AllPermission;
+grant codeBase "file:${catalina.base}/bin/tomcat-juli.jar" {
+    permission java.security.AllPermission;
 };
-
 
 // ========== WEB APPLICATION PERMISSIONS =====================================
-
-// Grant full permission to the webapp
-grant codeBase "file:/webapps/ROOT/-" {
-        permission java.util.PropertyPermission;
-        permission java.lang.RuntimePermission;
-        permission java.io.FilePermission "file:/webapps/ROOT/-", "read";
-        permission java.security.AllPermission "file:/data/-";
-        permission java.io.FilePermission "file:/webapps${file.separator}ROOT${file.separator}WEB-INF${file.separator}classes${file.separator}logging.properties", "read";
-};
-
-        // ADDED: ROOT war context
-grant codeBase "file:${catalina.home}/lib/-" {
-        permission java.security.AllPermission;
-};
-
 
 // These permissions are granted by default to all web applications
 // In addition, a web application will be given a read FilePermission
@@ -139,6 +94,22 @@ grant {
     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.websocket";
     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.websocket.server";
 
-    // Added policy specific to Jenkins
-    permission java.util.PropertyPermission "java.util.logging.config.class", "read";
+    // ================================ ADDED for deployed war
+    // temporary files
+    permission java.security.AllPermission "file:/dev/shm/-";
+    permission java.security.AllPermission "file:/tmp/-";
+    permission java.security.AllPermission "file:/var/tmp/-";
+
+    // Other OS locations for tomcat user
+    permission java.security.AllPermission "file:/var/cache/-";
+    permission java.security.AllPermission "file:/home/tomcat/-";
+
+    // app specific persistent data
+    permission java.security.AllPermission "file:/data/-";
+
+    // itself
+    permission java.security.AllPermission "file:/webapps/ROOT/-";
+
+    // Read any system property
+    permission java.util.PropertyPermission "*", "read";
 };

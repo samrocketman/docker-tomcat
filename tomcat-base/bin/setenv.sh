@@ -5,5 +5,4 @@ else
   CATALINA_OUT="/dev/stdout"
 fi
 CATALINA_OUT_CMD=
-CATALINA_TMPDIR=/tmp
 CATALINA_PID=
