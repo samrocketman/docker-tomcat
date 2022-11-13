@@ -12,7 +12,7 @@ apk add --no-cache openjdk11-"${java}" dumb-init; \
 adduser -u 100 -G nogroup -h /home/tomcat -S tomcat; \
 mkdir /tomcat; \
 cd /tomcat; \
-mkdir -p bin conf;
+mkdir -p bin conf; \
 rm -rf /var/cache/apk
 
 # Install tomcat 9
