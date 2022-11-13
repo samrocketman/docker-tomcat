@@ -87,9 +87,9 @@ environment variable.
 
 ### Disable Security Manager
 
-However, if you want to disable sandboxing entirely
-you can add the following line to the end of your [application
-Dockerfile](Dockerfile.multistage) removing `-security` option.
+if you want to disable sandboxing entirely you can add the following line to the
+end of your [application Dockerfile](Dockerfile.multistage) removing `-security`
+option.
 
 ```dockerfile
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]
