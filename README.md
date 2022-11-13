@@ -56,6 +56,11 @@ Security policy grants your app unconstrained access to the following locations.
 
 Other locations will require a policy update.
 
+Modify JVM behavior through the following environment variables.
+
+* `CATALINA_OPTS`
+* `JAVA_OPTS`
+
 ### Example Application Dockerfile
 
 An example [application Dockerfile](Dockerfile.multistage) has also been
