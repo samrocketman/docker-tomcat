@@ -27,6 +27,11 @@ The tomcat base image can be viewed in [`Dockerfile`](Dockerfile).
 
 # Application deployment
 
+Your application should be extracted to `/webapps/ROOT`.  Any other location my
+require changing the security manager policy.
+
+### Example Application Dockerfile
+
 An example [application Dockerfile](Dockerfile.multistage) has also been
 provided.
 
@@ -34,11 +39,29 @@ Due to hardening `unpackWARs` and `autoDeploy` are both disabled.  You must
 extract your war files as part of Docker image building.
 
 > Note: The application Dockerfile uses `java xf *.war` to extract an
-> application into `/webapps/ROOT`.
+> application into `/webapps/ROOT`.  This folder is the ROOT context for tomcat.
 
-It is recommended to keep tomcat security hardening in place and add your own
-[`catalina.policy`](tomcat-base/conf/catalina.policy) (see [Tomcat
-docs][tomcat-security]).  However, if you want to disable sandboxing entirely
+### Security Manager on by default
+
+It is recommended to keep tomcat security hardening in place.  By default a very
+broad policy is applied which allows most actions within reason.
+
+If you wish to overwrite this policy then overwrite the following policy file in
+the tomcat container.
+
+* [`/tomcat/conf/catalina.policy`](tomcat-base/conf/catalina.policy) (see also [Tomcat
+docs][tomcat-security]).
+
+### Debug security manager
+
+You can enable more debug logs for security manager with the following
+environment variable.
+
+    docker run -e CATALINA_OPTS=-Djava.security.debug=access ...
+
+### Disable Security Manager
+
+However, if you want to disable sandboxing entirely
 you can add the following line to the end of your [application
 Dockerfile](Dockerfile.multistage) removing `-security` option.
 
@@ -73,7 +96,7 @@ Jenkins.
 
 Build all prerequisite docker images.
 
-    docker build -t tomcat .
+    docker build --build-arg java=jdk --build-arg all=true -t tomcat .
     docker build -t sample -f Dockerfile.multistage .
     mkdir ../jenkins_home
 
