@@ -3,6 +3,18 @@
 Minimal tomcat container based on alpine meant for production use.  TLS is
 assumed to be provided externally by a load balancer.
 
+- [Hardened minimal tomcat](#hardened-minimal-tomcat)
+- [Best practices](#best-practices)
+- [Tomcat base image](#tomcat-base-image)
+- [Application deployment](#application-deployment)
+  - [Example Application Dockerfile](#example-application-dockerfile)
+  - [Security Manager on by default](#security-manager-on-by-default)
+  - [Debug security manager](#debug-security-manager)
+  - [Disable Security Manager](#disable-security-manager)
+- [Logging](#logging)
+- [Filesystem layout](#filesystem-layout)
+- [WebApp example](#webapp-example)
+
 # Best practices
 
 - Tomcat 9 running on openjdk11
