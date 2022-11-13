@@ -94,8 +94,9 @@ excluding Java.
 See [filesystem-layout.txt](filesystem-layout.txt)
 
 ```bash
-docker run -itu root tomcat /bin/sh -c \
-  'apk add tree &> /dev/null; tree /tmp /webapps /opt/tomcat /tomcat' \
+docker run -u root tomcat /bin/sh -c \
+  'apk add --no-cache tree &> /dev/null; \
+      tree /home/tomcat /tmp /var/cache /var/tmp /webapps /tomcat /opt/tomcat' \
   > filesystem-layout.txt
 ```
 

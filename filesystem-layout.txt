@@ -1,5 +1,27 @@
+/home/tomcat
 /tmp
+/var/cache
+/var/tmp
 /webapps
+└── ROOT
+/tomcat
+├── bin
+│   ├── setenv.sh
+│   └── tomcat-juli.jar
+├── conf
+│   ├── catalina.policy
+│   ├── catalina.properties
+│   ├── logging.properties
+│   ├── server.xml
+│   └── web.xml
+├── lib
+│   └── org
+│       └── apache
+│           └── catalina
+│               └── util
+│                   └── ServerInfo.properties
+├── temp
+└── work
 /opt/tomcat
 ├── LICENSE
 ├── NOTICE
@@ -65,22 +87,5 @@
     ├── tomcat-util.jar
     ├── tomcat-websocket.jar
     └── websocket-api.jar
-/tomcat
-├── bin
-│   ├── setenv.sh
-│   └── tomcat-juli.jar
-├── conf
-│   ├── catalina.policy
-│   ├── catalina.properties
-│   ├── logging.properties
-│   ├── server.xml
-│   └── web.xml
-├── lib
-│   └── org
-│       └── apache
-│           └── catalina
-│               └── util
-│                   └── ServerInfo.properties
-└── work
 
-8 directories, 8 files
+2 directories, 62 files
