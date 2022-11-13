@@ -30,6 +30,9 @@ assumed to be provided externally by a load balancer.
     writing logs to disk.
 - Security hardened
   - CIS Apache Tomcat 9 Benchmark; v1.1.0 - 12-18-2020
+  - `chmod 700 /tomcat /opt/tomcat /data /home/tomcat`
+  - All extra default tomcats removed.
+  - 
 
 # Tomcat base image
 
