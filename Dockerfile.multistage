@@ -10,6 +10,4 @@ cd /webapps/ROOT; \
 jar xf ../*.war
 
 FROM tomcat
-RUN set -ex; \
-mkdir -p /webapps/ROOT
 COPY --from=0 /webapps/ROOT /webapps/ROOT
