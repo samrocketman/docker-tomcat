@@ -79,8 +79,8 @@ Modify JVM behavior through the following environment variables.
 
 An example [application Dockerfile](example/Dockerfile) has also been provided.
 
-Due to hardening `unpackWARs` and `autoDeploy` are both disabled.  You must
-extract your war files as part of Docker image building.
+Due to hardening automatic application deployment is disabled.  You must extract
+your war files as part of Docker image building.
 
 > Note: The application Dockerfile uses `java xf *.war` to extract an
 > application into `/webapps/ROOT`.  This folder is the ROOT context for tomcat.
