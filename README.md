@@ -77,8 +77,7 @@ Modify JVM behavior through the following environment variables.
 
 ### Example Application Dockerfile
 
-An example [application Dockerfile](Dockerfile.multistage) has also been
-provided.
+An example [application Dockerfile](example/Dockerfile) has also been provided.
 
 Due to hardening `unpackWARs` and `autoDeploy` are both disabled.  You must
 extract your war files as part of Docker image building.
@@ -107,7 +106,7 @@ environment variable.
 ### Disable Security Manager
 
 if you want to disable sandboxing entirely you can add the following line to the
-end of your [application Dockerfile](Dockerfile.multistage) removing `-security`
+end of your [application Dockerfile](example/Dockerfile) removing `-security`
 option.
 
 ```dockerfile
