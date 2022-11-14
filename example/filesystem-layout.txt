@@ -11,6 +11,7 @@
 ├── conf
 │   ├── catalina.policy
 │   ├── catalina.properties
+│   ├── context.xml
 │   ├── logging.properties
 │   ├── server.xml
 │   └── web.xml
