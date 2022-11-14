@@ -3,7 +3,6 @@
 Minimal tomcat container based on alpine meant for production use.  TLS is
 assumed to be provided externally by a load balancer.
 
-- [Hardened minimal tomcat](#hardened-minimal-tomcat)
 - [Best practices](#best-practices)
 - [Tomcat base image](#tomcat-base-image)
 - [Application deployment](#application-deployment)
