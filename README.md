@@ -105,7 +105,7 @@ environment variable.
 
 ### Disable Security Manager
 
-if you want to disable sandboxing entirely you can add the following line to the
+If you want to disable sandboxing entirely you can add the following line to the
 end of your [application Dockerfile](example/Dockerfile) removing `-security`
 option.
 
@@ -115,8 +115,16 @@ CMD ["/opt/tomcat/bin/catalina.sh", "run"]
 
 # Logging
 
-All logs push to stdout.  Access logs are prefixed with `ACCESS:` followed by
-the standard tomcat logging format.
+All logs should push to stdout.
+
+If your application has special logging enabled, then don't write to a file.
+Instead, write the log to stdout and add a log prefix to differentiate instead.
+
+* Logs with no prefix are assumed to be tomcat and its deployed application.
+* Access logs are prefixed with `ACCESS:` followed by standard tomcat format.
+
+For a `stdout` example, see `AccessLogValve` in
+[`/tomcat/conf/server.xml`](tomcat-base/conf/server.xml).
 
 # Filesystem layout
 
