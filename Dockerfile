@@ -55,7 +55,7 @@ RUN set -ex; \
 USER tomcat
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 WORKDIR /home/tomcat
-ENV HOME=/home/tomcat
+ENV HOME=/home/tomcat USER=tomcat
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 ENV PATH="${JAVA_HOME}"/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV CATALINA_BASE=/tomcat CATALINA_HOME=/opt/tomcat
