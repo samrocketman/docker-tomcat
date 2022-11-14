@@ -124,13 +124,14 @@ the standard tomcat logging format.
 A filesystem layout has been generated highlighting the parts for tomcat
 excluding Java.
 
-See [filesystem-layout.txt](filesystem-layout.txt)
+See [filesystem-layout.txt](example/filesystem-layout.txt)
 
 ```bash
 docker run -u root tomcat /bin/sh -c \
   'apk add --no-cache tree &> /dev/null; \
+      rm -rf /var/cache/*; \
       tree /home/tomcat /tmp /var/cache /var/tmp /webapps /tomcat /opt/tomcat' \
-  > filesystem-layout.txt
+  > example/filesystem-layout.txt
 ```
 
 # WebApp example
@@ -143,7 +144,7 @@ Jenkins.
 Build all prerequisite docker images.
 
     docker build --build-arg java=jdk --build-arg all=true -t tomcat .
-    docker build -t sample -f Dockerfile.multistage .
+    docker build -t sample -f example/Dockerfile .
 
 Run Jenkins webapp in hardened tomcat container.
 
