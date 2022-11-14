@@ -17,6 +17,7 @@ assumed to be provided externally by a load balancer.
 # Best practices
 
 - Tomcat 9 running on openjdk11
+  - JRE by default but JDK available by Docker build arg.
   - Configuration split between `CATALINA_HOME` and `CATALINA_BASE`.
 - Docker practices
   - Minimal alpine image.
